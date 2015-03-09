@@ -60,6 +60,40 @@ https://github.com/punchdrunker/httpd-ircbot
 
 終了後、再度http://localhost:4567にアクセスすると、レビューの一覧が表示されます
 
+サーバ構築
+-------
+ubuntuの作業マシンからvagrant-awsでこのアプリ用のサーバを構築する手順
+
+### vagrantのインストール
+
+    $ cd /tmp
+	$ wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb
+	$ sudo dpkg -i vagrant_1.7.2_x86_64.deb
+
+### vagrant-awsのインストールと事前準備
+
+    $ vagrant plugin install vagrant-aws
+	$ vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
+
+### AWS用環境変数の設定
+
+    $ export AWS_ACCESS_KEY_ID=xxxxxxxxxx
+    $ export AWS_SECRET_ACCESS_KEY=xxxxxxxxxx
+    $ export AWS_SSH_USERNAME=xxxxxxxxxx
+    $ export AWS_SECURITY_GROUPS=xxxxxxxxxx
+    $ export AWS_KEYPAIR_NAME=xxxxxxxxxx
+    $ export AWS_PRIVATE_KEY_PATH=xxxxxxxxxx
+
+### サーバ起動
+
+    $ vagrant up --provider=aws
+
+### プロビジョニング
+[itamae](https://github.com/itamae-kitchen/itamae)を使ってプロビジョニングします。
+
+    $ bundle install
+    $ be itamae ssh --vagrant itamae/recipe.rb
+
 License
 -------
 BSDライセンスで提供します。なので、一切無保証です。

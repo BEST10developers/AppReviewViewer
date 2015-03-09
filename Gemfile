@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 gem 'json'
 gem 'nokogiri'
@@ -7,3 +7,4 @@ gem 'sqlite3'
 gem 'sinatra'
 gem 'sinatra-reloader'
 gem 'sinatra-sequel'
+gem 'itamae', git: 'git@github.com:itamae-kitchen/itamae.git'
