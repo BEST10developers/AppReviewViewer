@@ -1,13 +1,3 @@
-GIT
-  remote: git@github.com:itamae-kitchen/itamae.git
-  revision: f31da82b59aa091998d1bcc04307a85c6c53c4b9
-  specs:
-    itamae (1.1.18)
-      ansi
-      hashie
-      specinfra (>= 2.18.2)
-      thor
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -15,6 +5,11 @@ GEM
     backports (3.6.4)
     bacon (1.2.0)
     hashie (3.4.0)
+    itamae (1.1.17)
+      ansi
+      hashie
+      specinfra (~> 2.12.1)
+      thor
     json (1.8.2)
     kgio (2.9.3)
     mini_portile (0.6.2)
@@ -48,7 +43,7 @@ GEM
       bacon
       sequel (>= 3.2.0)
       sinatra (>= 0.9.4)
-    specinfra (2.18.3)
+    specinfra (2.12.7)
       net-scp
       net-ssh
     sqlite3 (1.3.10)
@@ -63,7 +58,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  itamae!
+  itamae
   json
   nokogiri
   sequel
