@@ -41,7 +41,7 @@ bundlerが利用できる環境であれば、Gemfileのあるディレクトリ
 
 その後、以下のコマンドで起動します
 
-    $ ruby app.rb
+    $ bundle exec unicorn -c unicorn.rb -D
 
 http://localhost:4567 にアクセスして、左メニューからアプリを登録します。
 
