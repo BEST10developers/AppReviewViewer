@@ -75,7 +75,7 @@ ubuntuの作業マシンからvagrant-awsでこのアプリ用のサーバを構
     $ vagrant plugin install vagrant-aws
 	$ vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
 
-### AWS用環境変数の設定
+### 用環境変数の設定
 
     $ export AWS_ACCESS_KEY_ID=xxxxxxxxxx
     $ export AWS_SECRET_ACCESS_KEY=xxxxxxxxxx
@@ -83,6 +83,7 @@ ubuntuの作業マシンからvagrant-awsでこのアプリ用のサーバを構
     $ export AWS_SECURITY_GROUPS=xxxxxxxxxx
     $ export AWS_KEYPAIR_NAME=xxxxxxxxxx
     $ export AWS_PRIVATE_KEY_PATH=xxxxxxxxxx
+    $ export APPREVIEWS_VIP=xxxxxxxxxx
 
 ### サーバ起動
 

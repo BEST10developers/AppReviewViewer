@@ -1,0 +1,36 @@
+upstream appreviews-unicorn {
+  server unix:/tmp/appreviews_unicorn.sock;
+}
+
+server {
+  listen 80;
+  server_name <%= ENV['APPREVIEWS_VIP'] %>;
+
+  access_log  /var/log/nginx/appreviews/access.log;
+  error_log  /var/log/nginx/appreviews/error.log;
+
+  root   /srv/apps/appreviews/public/;
+
+  # for ELB
+  set_real_ip_from   172.31.0.0/16;
+  real_ip_header     X-Forwarded-For;
+
+  location ~* \.(ico|css|js|gif|jpe?g|png)(\?[0-9]+)?$ {
+    expires 1y;
+    add_header Cache-Control public;
+    break;
+  }
+
+  location / {
+    try_files $uri @app;
+  }
+
+  location @app {
+    proxy_set_header Host                   $host;
+    proxy_set_header X-Real-IP              $remote_addr;
+    proxy_set_header X-Forwarded-Host       $host;
+    proxy_set_header X-Forwarded-Server     $host;
+    proxy_set_header X-Forwarded-For        $proxy_add_x_forwarded_for;
+    proxy_pass http://appreviews-unicorn;
+  }
+}

@@ -1,18 +1,28 @@
 # git
-package 'git' do
-  action :install
-end
+package 'git'
 
 # nginx
-package 'nginx' do
-  action :install
+package 'nginx'
+
+directory '/var/log/nginx/appreviews' do
+  action :create
+  mode '2755'
+  owner ENV['AWS_SSH_USERNAME']
+  group ENV['AWS_SSH_USERNAME']
+end
+
+service 'nginx' do
+  action :enable
+end
+
+template '/etc/nginx/conf.d/appreviews.conf' do
+  source 'appreviews.conf.erb'
+  notifies :restart, 'service[nginx]', :delayed
 end
 
 # ruby
 %w(ruby ruby-dev).each do |p|
-  package p do
-    action :install
-  end
+  package p
 end
 
 execute 'install bundler' do
@@ -21,9 +31,7 @@ end
 
 # mecab
 %w(build-essential mecab mecab-ipadic-utf8 libmecab-dev).each do |p|
-  package p do
-    action :install
-  end
+  package p
 end
 
 # mecab-ruby
@@ -53,15 +61,11 @@ execute 'libxml2' do
   not_if 'test -e /usr/local/include/libxml2/'
 end
 %w(zlib1g-dev libxslt-dev).each do |p|
-  package p do
-    action :install
-  end
+  package p
 end
 
 # sqlite3
-package 'libsqlite3-dev' do
-  action :install
-end
+package 'libsqlite3-dev'
 
 # deploy app
 app_dir = '/srv/apps'
